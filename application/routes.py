@@ -65,3 +65,9 @@ def update_todo(id):
             flash('Todo not found', 'danger')
             return redirect("/")
     return render_template('add_todo.html', form=form)
+
+@app.route('/delete_todo/<id>')
+def delete_todo(id):
+    db.todo_flask.find_one_and_delete({"_id": ObjectId(id)})
+    flash('Todo deleted successfully', 'success')
+    return redirect("/")
